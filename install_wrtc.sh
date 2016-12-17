@@ -18,16 +18,14 @@ if [ $choice == 'yes' ]; then
     touch accessToken.php authenticateNumber.php checkFunds.php
     cd ../
     # CHECK FOR COMPOSER INSTALL AND INSTALL IF MISSING, RUN COMPOSER #
-    command -v composer >/dev/null && echo "Composer is already installed." && composer install || { 
+    command -v composer >/dev/null && echo "Composer is already installed." && composer self-update && composer install || { 
         echo -n 'Composer was not found and is required, do you want to install? [yes/no]: '
         read choice
         if [ $choice == 'yes' ]; then
             echo 'Installing Composer...'
-            curl -LOk https://getcomposer.org/installer composer-setup.php
-            php -r "if (hash_file('SHA384', 'composer-setup.php') === 'aa96f26c2b67226a324c27919f1eb05f21c248b987e6195cad9690d5c1ff713d53020a02ac8c217dbf90a7eacc9d141d') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-            php composer-setup.php
-            php -r "unlink('composer-setup.php')"
+            curl -s https://getcomposer.org/installer | php
             mv composer.phar composer
+            composer about
             echo 'Composer installed successfully.'
             composer install
         else
