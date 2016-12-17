@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if [ "$(uname)" == "Darwin" ]; then
     echo "Unfortunately this installation script is not fully supported on MacOS. Please check the repo for updates and manual installation instructions."       
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
