@@ -4,9 +4,10 @@ if [ "$(uname)" == "Darwin" ]; then
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     # PROMPT USER FOR INSTALL CONFIRMATION #
     echo "This will install the Message360 WebRTC client, configured for use with the PHP Helper LIbrary."
+    echo "Please make sure you are running this from within the location that you are planning to run this from."
     echo -n "Do you want to continue? Type yes or no and press [ENTER]: "
     read choice
-    cancel_error="Installation cancelled, exiting install."
+    cancel_error="Installation canceled, exiting install."
     if [ $choice == 'yes' ]; then
         # DOWNLOAD WEBRTC SOURCE CODE AND MESSAGE360 HELPER LIBRARY #
         echo 'Performing install... Downloading source code.'
