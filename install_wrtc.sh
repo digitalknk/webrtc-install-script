@@ -12,11 +12,11 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     echo -n "Is your version of PHP 5.6 or newer? Type yes if it is 5.6 or newer or no if it is lower than 5.6 and press [ENTER]: "
     read choice
     php_error="Installation canceled, exiting install. Please make sure you have a version of GREATER than PHP 5.6 installed"
-    if [ $choice == 'yes' ]; then
+    if [ $choice == "yes" ]; then
         echo -n "Do you want to continue? Type yes or no and press [ENTER]: "
         read choice
         cancel_error="Installation canceled, exiting install."
-        if [ $choice == 'yes' ]; then
+        if [ $choice == "yes" ]; then
             # DOWNLOAD WEBRTC SOURCE CODE AND MESSAGE360 HELPER LIBRARY #
             echo 'Performing install... Downloading source code.'
             git clone https://github.com/danielpark-ytel/message360-webrtc.git webrtc
@@ -33,15 +33,15 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
             command -v composer >/dev/null && echo "Composer is already installed." && composer self-update && composer install || { 
                 echo -n 'Composer was not found and is required, do you want to install? [yes/no]: '
                 read choice
-                if [ $choice == 'yes' ]; then
+                if [ $choice == "yes" ]; then
                     echo 'Installing Composer...'
                     curl -s https://getcomposer.org/installer | php
                     mv composer.phar composer
-                    composer about
+                    ./composer about
                     echo 'Composer installed successfully.'
-                    composer install
+                    ./composer install
                 else
-                    if [ $choice == 'no' ]; then
+                    if [ $choice == "no" ]; then
                         echo $cancel_error
                         exit 1
                     fi
@@ -107,10 +107,10 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
             command -v node >/dev/null && echo "Node.js is already installed, checking for updates.." && npm install npm@latest -g || { 
                 echo -n 'Node.js was not found and is required, do you want to install? [yes/no]: '
                 read choice
-                if [ $choice == 'yes' ]; then
+                if [ $choice == "yes" ]; then
                     echo "npm install"
                 else
-                    if [ $choice == 'no' ]; then
+                    if [ $choice == "no" ]; then
                         echo $cancel_error
                         cd ../ && rm -rf webrtc
                         exit 1
@@ -121,10 +121,10 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
             command -v bower >/dev/null && echo "Bower is installed, continuing with build." || {
                 echo -n "Bower was not found and is required, do you want to install? [yes/no]: "
                 read choice
-                if [ $choice == 'yes' ]; then
+                if [ $choice == "yes" ]; then
                     npm install -g bower
                 else 
-                    if [ $choice == 'no' ]; then
+                    if [ $choice == "no" ]; then
                         echo $cancel_error
                         exit 1
                     fi
@@ -135,13 +135,13 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
             # RUN GRUNTFILE.JS #
             grunt
         else
-            if [ $choice == 'no' ]; then
+            if [ $choice == "no" ]; then
                 echo $cancel_error
                 exit 1
             fi
         fi
     else
-        if [ $choice == 'no' ]; then
+        if [ $choice == "no" ]; then
             echo $php_error
             exit 1
         fi
